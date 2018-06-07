@@ -1,0 +1,335 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %}首页{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        #top {
+            padding: 5px 20px;
+            height: 25px;
+            width: 100%;
+            background: #F2F2F2;
+        }
+
+        #top a, #top span {
+            margin: 0 5px;
+            font-size: 14px;
+            color: #999999;
+        }
+
+        #top a:hover {
+            color: red;
+        }
+
+        #top_left {
+            float: left;
+        }
+
+        #top_right {
+            float: right;
+        }
+
+        #search > img {
+            margin-left: 50px;
+            width: 290px;
+            height: 130px;
+            float: left;
+        }
+
+        #search > div {
+            width: 60%;
+            float: left;
+        }
+
+        #search_hot > li {
+            float: left;
+            padding: 10px;
+        }
+
+        #navi {
+            padding: 5px;
+        }
+
+        .navi_cls {
+            width: 100%;
+            background: red;
+            padding: 5px;
+        }
+
+        .navi_cls li {
+            float: left;
+            padding: 5px;
+        }
+
+        .navi_cls li > a {
+            padding: 0 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /*分类菜单样式  start */
+        #category {
+            position: relative;
+            height: 500px;
+            z-index: 2;
+        }
+
+        #category > .category_1 {
+            background: gainsboro;
+            padding-top: 6px;
+            padding-left: 20px;
+            width: 200px;
+        }
+
+        #category > .category_1:hover {
+            display: block;
+            background: white;
+        }
+
+        #category > .category_1 > a {
+            width: 200px;
+            font-size: 16px;
+        }
+
+        #category > .category_2 {
+            background: white;
+            width: 60%;
+            height: 500px;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 200px;
+        }
+
+        .menu2_parent, .menu2_child {
+            padding: 10px 5px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #cate {
+            position: relative;
+        }
+
+    </style>
+    <style>
+
+        #banner {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #banner ul li {
+            float: left;
+        }
+
+        #banner ul li img {
+            width: 100%;
+        }
+
+        #banner {
+            width: 1180px;
+            height: 500px;
+        }
+
+        #banner .dots {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+        }
+
+        #banner .dots li {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 4px;
+            text-indent: -999em;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            cursor: pointer;
+            opacity: .4;
+            -webkit-transition: background .5s, opacity .5s;
+            -moz-transition: background .5s, opacity .5s;
+            transition: background .5s, opacity .5s;
+        }
+
+        .dots li.active {
+            background: #fff;
+            opacity: 1;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 200px;
+        }
+
+        #al {
+            left: 15px;
+        }
+
+        #ar {
+            right: 15px;
+        }
+    </style>
+    <style>
+        #shop > li {
+            float: left;
+            width: 18%;
+            padding: 10px;
+        }
+    </style>
+
+    <style type="text/css">
+        #content {
+            padding: 10px;
+        }
+
+        #content h3 {
+            border-left: 3px solid greenyellow;
+            font-size: 20px;
+            padding: 0px 10px;
+        }
+
+    </style>
+
+
+{% endblock %}
+
+{% block page_jq %}
+    <script src="{% static 'js/unslider.min.js' %}"></script>
+
+    <script language="JavaScript" type="text/javascript">
+        $(function () {
+            $('.category_1').mouseover(function () {
+                // 隐藏所有二级子菜单
+                $('.category_2').hide();
+                $(this).next().show();
+            })
+
+            $('.category').mouseleave(function () {
+                // 隐藏所有二级子菜单
+                $('.category_2').hide();
+            })
+            $('#banner').unslider(
+                {})
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#search_btn').click(function () {
+                $.get()
+            })
+        })
+
+    </script>
+{% endblock %}
+
+{% block page_head %}
+    <div id="top" class="clear">
+        <div id="top_left">
+            <a href="{% url 'index' %}">首页</a>
+            <span>喵，欢迎来天猫</span>
+            {% if  username %}
+                <span>{{ username }} </span>
+                <a href="#">登出</a>
+            {% else %}
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+            {% endif %}
+        </div>
+        <div id='top_right'>
+            <a href=#>我的订单</a>
+            <a href="#">购物车{{ num|default:0 }}件</a>
+        </div>
+    </div>
+    <div id="search" class="clear">
+        <img src="{% static 'img/logo.gif' %}">
+        <div>
+            <div id="search_btn">
+                <input type="text" name="keyword">
+                <input type="button" id="search_btn" value="搜索">
+            </div>
+            <ul id="search_hot" class="clear">
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">1</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="navi">
+        <!-- 导航条-->
+        <div class="navi_cls">
+            <ul class="clear">
+                <li style="font-size: 20px;">商品分类</li>
+                {% for nvi  in navigations %}
+                    <li><a href="#">{{ nvi.nav_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- 分类菜单-->
+        <div id="cate">
+            <div id="category" class="clear">
+                {% for cate in cate_list %}
+                    <!-- 一级菜单的数据-->
+                    <div class="category_1">
+                        <a href="#">{{ cate.name }}</a>
+                    </div>
+                    <!-- 一级菜单对应的二级菜单的数据-->
+                    <ul class="category_2">
+                        {% for menu in cate.subs %}
+                            <li class="menu2_parent">
+                                <a href="#"> {{ menu.name }}> </a>
+                                {% for menu2 in menu.subs2 %}
+                                    <a class="menu2_child">{{ menu2.name }}</a>
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+            <div id="banner">
+                <ul>
+                    {% for banner in banners %}
+                        <li><a href="{{ banner.detail_url }}">
+                            <img height="500" width="1200"
+                                 src="http://127.0.0.1:8000/media/{{ banner.image }}"></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_content %}
+    <ul id='page_content'>
+        {% for cate in cate_list %}
+            <li>
+                <h3>{{ cate.name }}</h3>
+                <ul id="shop" class="clear">
+                    {% for shop in cate.shops %}
+                        <li>
+                            <a href="/shop/detail/{{ shop.shop_id }}">
+                                <img src="http://127.0.0.1:8000/static/img/productSingle_middle/{{ shop.images.0.shop_img_id }}.jpg">
+                                <p>{{ shop.sub_title }}</p>
+                                <p>{{ shop.promote_price }}</p>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block page_footer %}
+
+{% endblock %}
+

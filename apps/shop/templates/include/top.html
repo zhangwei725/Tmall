@@ -1,0 +1,22 @@
+<!--搜索 -->
+{% load staticfiles %}
+<div id="search" class="clear">
+    <img src="{% static 'img/logo.gif' %}">
+    <div id="top" class="clear">
+        <div id="top_left">
+            <a href="{% url 'index' %}">首页</a>
+            <span>喵，欢迎来天猫</span>
+            {% if  username %}
+                <span>{{ username }} </span>
+                <a href="#">登出</a>
+            {% else %}
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+            {% endif %}
+        </div>
+        <div id='top_right'>
+            <a href=#>我的订单</a>
+            <a href="#">购物车{{ num|default:0 }}件</a>
+        </div>
+    </div>
+</div>

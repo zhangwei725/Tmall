@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #cate_div {
+            height: 550px;
+            border: 1px solid black;
+            padding: 5px;
+            width: 100%;
+        }
+
+        #cate {
+            float: left;
+            width: 30%;
+        }
+
+        #cate_sub {
+            float: left;
+            height: 500px;
+            width: 60%;
+        }
+    </style>
+    <link href="css/common.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" language="JavaScript">
+        $(function () {
+            let $cate_sub_ul = $('#cate_sub');
+            let $cate_ul = $('#cate');
+            hide_cate_sub_data();
+
+            $.get('http://127.0.0.1:8000/shop/cate/', function (result) {
+                show_cate_data(result.data, $cate_sub_ul);
+            });
+
+            function show_cate_data(data) {
+                for (let cate of data) {
+                    $cate_ul.append(
+                        $('<li>')
+                            .append($('<a>').text(cate.name))
+                            .mouseover(function () {
+                                $cate_sub_ul.empty().show();
+                                show_cate_sub_data(cate.subs)
+                            })
+                    );
+                }
+            }
+
+            function show_cate_sub_data(subs) {
+                for (let sub of subs) {
+                    $cate_sub_ul.append($('<li>').append($('<a>').text(sub.name)))
+                }
+            }
+
+            function hide_cate_sub_data() {
+                $("#cate_div").mouseleave(function () {
+                    $cate_sub_ul.hide()
+                })
+            }
+
+
+        });
+
+
+    </script>
+
+
+</head>
+<body>
+<div id="cate_div" class="clear">
+    <!--一级菜单 -->
+    <ul id="cate">
+    </ul>
+    <!--二级菜单 -->
+    <ul id="cate_sub">
+    </ul>
+</div>
+
+</body>
+</html>

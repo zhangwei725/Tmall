@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{#母版#}
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block  page_title %}
+        {% endblock %}
+    </title>
+    <link href="{% static 'css/common.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://cdn.bootcss.com/jquery/2.2.2/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    {% block page_css %}
+    {% endblock %}
+    {% block page_jq %}
+    {% endblock %}
+
+</head>
+<body>
+<div>
+    <div id="head">
+        {% block page_head %}
+
+        {% endblock %}
+    </div>
+
+    <div id="content">
+
+        {% block page_content %}
+        {% endblock %}
+
+    </div>
+    <div id="footer">
+        {% block page_footer %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

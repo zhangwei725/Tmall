@@ -1,0 +1,16 @@
+<ul id='content'>
+    {% for cate in cate_list %}
+        <li>
+            <h3>{{ cate.name }}</h3>
+            <ul id="shop" class="clear">
+                {% for shop in cate.shops %}
+                    <li>
+                        <img src="http://127.0.0.1:8000/static/img/productSingle_middle/{{ shop.images.0.shop_img_id }}.jpg">
+                        <p>{{ shop.sub_title }}</p>
+                        <p>{{ shop.promote_price }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

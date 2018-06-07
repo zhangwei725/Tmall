@@ -1,0 +1,7 @@
+<div>
+    <ul id="banner">
+        {% for banner in banners %}
+            <li><a href="{{ banner.detail_url }}"><img src="http://127.0.0.1:8000/media/{{ banner.image }}"></a></li>
+        {% endfor %}
+    </ul>
+</div>

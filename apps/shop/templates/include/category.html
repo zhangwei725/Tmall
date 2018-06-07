@@ -1,0 +1,36 @@
+<!-- 分类菜单-->
+<div id="category" class="clear">
+    <!--
+            事件移入移除
+            显示隐藏
+            {% for cate in cate_list %}
+                {{ cate.name }}
+                {% for submenu in cate.subs %}
+                    {{ submenu.name }}
+                    {% for sub2 in submenu.subs2 %}
+                        {{ sub2.name }}
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+     选择器   盒子模型  浮动定位   常用属性
+             -->
+    {% for cate in cate_list %}
+        <!-- 一级菜单的数据-->
+        <div class="category_1"><a href="#">{{ cate.name }}</a></div>
+        <!-- 一级菜单对应的二级菜单的数据-->
+        <div class="category_2">
+            {% for menu in cate.subs %}
+                <div>
+                    <a href="#">
+                        {{ menu.name }}
+                    </a>
+                </div>
+                <div>
+                    {% for menu2 in menu.subs2 %}
+                        <div><a>{{ menu2.name }}</a></div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
