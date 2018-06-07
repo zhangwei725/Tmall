@@ -106,15 +106,3 @@ venv.bak/
 .mypy_cache/
 
 /static/img
-.idea/dataSources.local.xml
-.idea/dataSources.xml
-.idea/dataSources/
-.idea/dictionaries/
-.idea/encodings.xml
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-.idea/tmall.iml
-.idea/workspace.xml
-media/banner/20180607/
-media/upload/
