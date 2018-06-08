@@ -165,7 +165,6 @@ class Order(models.Model):
     """ 1正常 0 异常, -1 删除 """
     status = models.IntegerField('订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name="用户ID")
-    shop = models.ForeignKey('Shop', models.DO_NOTHING, db_column='shop_id', verbose_name="商品ID")
 
     def __str__(self):
         return self.order_code

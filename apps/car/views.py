@@ -19,3 +19,11 @@ def add_car(request):
     except:
         pass
     return render(request, 'shop_detail.html', {'msg': 'success'})
+
+
+# 用户id
+def shop_car(request):
+    cars = ShopCar.objects.filter(user_id=1)
+    for car in cars:
+        car.shop.images = car.shop.shopimage_set.filter(type='type_single').first()
+    return render(request, 'shop_car.html', {'cars': cars})

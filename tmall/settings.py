@@ -15,6 +15,7 @@ ALLOWED_HOSTS = []
 #  自定义的APPS
 CUSTOM_APPS = [
     'apps.shop',
+    'apps.car',
 ]
 
 # 扩展的第三方库

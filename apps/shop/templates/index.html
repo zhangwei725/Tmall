@@ -247,7 +247,7 @@
         </div>
         <div id='top_right'>
             <a href=#>我的订单</a>
-            <a href="#">购物车{{ num|default:0 }}件</a>
+            <a href="{% url 'show' %}">购物车{{ num|default:0 }}件</a>
         </div>
     </div>
     <div id="search" class="clear">
