@@ -1,0 +1,16 @@
+<div>
+    <p>商品参数:</p>
+    {% for pro in properties %}
+        {{ pro.name }} : {{ pro.value.value }}
+    {% endfor %}
+</div>
+
+<div>
+    <p>商品评论{{ reviews|length }}</p>
+    {% for review in  reviews %}
+        {{ review.content }}
+        {{ review.create_date|date:'Y-m-d' }}
+    {% endfor %}
+</div>
+
+

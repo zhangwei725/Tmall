@@ -188,7 +188,6 @@ class Property(models.Model):
         verbose_name = '商品属性'
         verbose_name_plural = verbose_name
 
-
 class PropertyValue(models.Model):
     pro_value_id = models.IntegerField(verbose_name='ID', primary_key=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, db_column='shop_id', verbose_name="商品ID")

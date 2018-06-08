@@ -1,7 +1,6 @@
 import datetime
 import json
 
-from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
@@ -64,7 +63,7 @@ v
 '''
 1> django_migrations  表里的每一条对应一个app下的每次生产一个对应文件
 '''
-from .models import Navigation, Category, Banner, Shop
+from .models import Navigation, Category, Banner, Shop, Property, PropertyValue, Review
 
 
 #
@@ -156,9 +155,7 @@ def cate(request):
     给模板)-->
     渲染--->
     显示给用户
-
     """
-
     # key: value
     # 属性 = 值
     # 把对象转化字典
@@ -181,7 +178,7 @@ def model_to_dict(model):
 
 
 # xxx/?keyword=''
-def serach(request):
+def search(request):
     keyword = request.GET.get('keyword')
     shops = Shop.objects.filter(name__icontains=keyword)
     for shop in shops:
@@ -192,14 +189,12 @@ def serach(request):
 def shop_detail(request, sid):
     shop = Shop.objects.get(pk=int(sid))
     shop.imgs = shop.shopimage_set.all()
-    return render(request, 'shop_detail.html', {'shop': shop})
+    # 通过分类菜单获取商品的参数
+    properties = Property.objects.filter(cate_id=shop.cate.cate_id)
+    for property in properties:
+        # 获取商品的参数通过shop_id 商品 propertyvalue
+        property.value = PropertyValue.objects.get(property=property)
 
-
-class Test:
-    def __init__(self):
-        self.nam = None
-
-
-test = Test()
-test.nam = '1132131'
-test.li = [1, 2, 3, 4]
+    # 获取商品的评论信息
+    reviews = Review.objects.filter(shop_id=147)
+    return render(request, 'shop_detail.html', {'shop': shop, 'properties': properties, 'reviews': reviews})
