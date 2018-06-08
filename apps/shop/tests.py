@@ -1,3 +1,10 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+class Test:
+    pass
+
+
+test = Test()
+test.name = '1231321321'
+print(test.name)

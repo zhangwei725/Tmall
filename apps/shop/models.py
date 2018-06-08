@@ -164,7 +164,8 @@ class Order(models.Model):
     confirm_date = models.DateTimeField('确认日期', blank=True, null=True)
     """ 1正常 0 异常, -1 删除 """
     status = models.IntegerField('订单状态', choices=ORDER_STATUS, default=1)
-    user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name="属性ID")
+    user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name="用户ID")
+    shop = models.ForeignKey('Shop', models.DO_NOTHING, db_column='shop_id', verbose_name="商品ID")
 
     def __str__(self):
         return self.order_code
@@ -188,6 +189,7 @@ class Property(models.Model):
         verbose_name = '商品属性'
         verbose_name_plural = verbose_name
 
+
 class PropertyValue(models.Model):
     pro_value_id = models.IntegerField(verbose_name='ID', primary_key=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, db_column='shop_id', verbose_name="商品ID")
@@ -208,14 +210,18 @@ class ShopCar(models.Model):
     number = models.IntegerField(verbose_name='商品数量', default=0)
     shop = models.ForeignKey(Shop, models.DO_NOTHING, verbose_name='商品ID')
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name='用户ID')
+    order = models.ForeignKey('Order', on_delete=models.SET_NULL, db_column='oid', null=True, verbose_name='商品ID')
+    # 1正常 -1 删除 ,0 禁止 2
+    status = models.IntegerField()
 
     def __str__(self):
         return self.shop.name
 
-    class Meta:
-        db_table = 'shop_car'
-        verbose_name = '购物车'
-        verbose_name_plural = verbose_name
+
+class Meta:
+    db_table = 'shop_car'
+    verbose_name = '购物车'
+    verbose_name_plural = verbose_name
 
 
 class ShopImage(models.Model):

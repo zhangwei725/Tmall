@@ -2,7 +2,7 @@ import datetime
 import json
 
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 """
 创建自定义的apps
@@ -177,15 +177,6 @@ def model_to_dict(model):
     return dic
 
 
-# xxx/?keyword=''
-def search(request):
-    keyword = request.GET.get('keyword')
-    shops = Shop.objects.filter(name__icontains=keyword)
-    for shop in shops:
-        shop.imgs = shop.shopimage_set.all()
-    return render(request, 'search.html', {'shops': shops})
-
-
 def shop_detail(request, sid):
     shop = Shop.objects.get(pk=int(sid))
     shop.imgs = shop.shopimage_set.all()
@@ -197,4 +188,15 @@ def shop_detail(request, sid):
 
     # 获取商品的评论信息
     reviews = Review.objects.filter(shop_id=147)
+
     return render(request, 'shop_detail.html', {'shop': shop, 'properties': properties, 'reviews': reviews})
+
+
+def search(request):
+    key = request.GET.get('keyword')
+    shops = Shop.objects.filter(name__icontains=key)
+    for shop in shops:
+        shop.images = shop.shopimage_set.filter(type='type_single').values('shop_img_id', 'shop_id')
+        shop.count = shop.review_set.count()
+        # select  * from  shop_img  where type='type_single'
+    return render(request, 'search.html', {'shops': shops})

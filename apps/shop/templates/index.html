@@ -219,13 +219,15 @@
                 {})
         })
     </script>
+
     <script type="text/javascript">
         $(function () {
             $('#search_btn').click(function () {
-                $.get()
+                // /shop/search/?keyword=aaa
+                let search_url = '/shop/search/?keyword=' + $('#search_inp').val()
+                $.get(search_url)
             })
         })
-
     </script>
 {% endblock %}
 
@@ -251,8 +253,10 @@
         <img src="{% static 'img/logo.gif' %}">
         <div>
             <div id="search_btn">
-                <input type="text" name="keyword">
-                <input type="button" id="search_btn" value="搜索">
+                <form action="{% url 'search' %}">
+                    <input type="text" name="keyword" id="search_inp">
+                    <input type="submit" value="搜索">
+                </form>
             </div>
             <ul id="search_hot" class="clear">
                 <li><a href="#">1</a></li>
@@ -330,6 +334,6 @@
 {% endblock %}
 
 {% block page_footer %}
-{% include 'include/footer.html' %}
+    {% include 'include/footer.html' %}
 {% endblock %}
 
