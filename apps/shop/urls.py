@@ -3,7 +3,7 @@ from apps.shop import views
 
 urlpatterns = [
     url('index/', views.index, name='index'),
-    url('search/', views.search ,name='search'),
+    url('search/', views.search, name='search'),
     url('cate/', views.cate),
     url('detail/(\d+)/', views.shop_detail, name='detail')
 ]

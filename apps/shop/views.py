@@ -2,7 +2,9 @@ import datetime
 import json
 
 from django.http import HttpResponse, JsonResponse
+
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 
 """
 创建自定义的apps
@@ -184,19 +186,34 @@ def shop_detail(request, sid):
     properties = Property.objects.filter(cate_id=shop.cate.cate_id)
     for property in properties:
         # 获取商品的参数通过shop_id 商品 propertyvalue
-        property.value = PropertyValue.objects.get(property=property)
-
+        property.value = PropertyValue.objects.get(property_id=716)
     # 获取商品的评论信息
     reviews = Review.objects.filter(shop_id=147)
-
     return render(request, 'shop_detail.html', {'shop': shop, 'properties': properties, 'reviews': reviews})
 
+
+"""
+1>使用form表单
+2>location.href
+3>使用重定向技术
+"""
+
+
+# render
+# render  url地址不会发生改变 本界面的刷新 TemplateResponse
+# redirect url地址会发生改变  相当于两次请求 可以是所有的地址
+
+# ?key=value
+
+# def search(request):
+#     key = request.GET.get('keyword')
+#     return redirect(reverse('search1', args=(key,)))
 
 def search(request):
     key = request.GET.get('keyword')
     shops = Shop.objects.filter(name__icontains=key)
     for shop in shops:
+        # select  * from  shop_img  where type='type_single'
         shop.images = shop.shopimage_set.filter(type='type_single').values('shop_img_id', 'shop_id')
         shop.count = shop.review_set.count()
-        # select  * from  shop_img  where type='type_single'
     return render(request, 'search.html', {'shops': shops})

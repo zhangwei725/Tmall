@@ -222,11 +222,12 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#search_btn').click(function () {
-                // /shop/search/?keyword=aaa
-                let search_url = '/shop/search/?keyword=' + $('#search_inp').val()
-                $.get(search_url)
-            })
+            /**
+             *  $('#search_btn').click(function () {
+                //第二种方案
+                location.href = '/shop/search/?keyword=' + $('#search_inp').val()
+                })
+             */
         })
     </script>
 {% endblock %}
@@ -252,19 +253,23 @@
     <div id="search" class="clear">
         <img src="{% static 'img/logo.gif' %}">
         <div>
-            <div id="search_btn">
-                <form action="{% url 'search' %}">
-                    <input type="text" name="keyword" id="search_inp">
-                    <input type="submit" value="搜索">
-                </form>
-            </div>
-            <ul id="search_hot" class="clear">
-                <li><a href="#">1</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">1</a></li>
-            </ul>
+            <!-- 解决方案
+          <input type="text" name="keyword" id="search_inp">
+          <input type="button" id="search_btn" value="搜索">
+-->
+            <form action="{% url 'search' %}">
+                <input type="text" name="keyword" id="search_inp">
+                <input type="submit" value="搜索">
+            </form>
+
         </div>
+        <ul id="search_hot" class="clear">
+            <li><a href="#">1</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">1</a></li>
+        </ul>
+    </div>
     </div>
     <div id="navi">
         <!-- 导航条-->

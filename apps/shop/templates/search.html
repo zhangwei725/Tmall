@@ -1,23 +1,17 @@
 {% extends 'base.html' %}
-<ul>
-    {% for shop in shops %}
-        <li>
-            <img src="{{ shop.images.0.shop_img_id }}" width="200">
-            <p>{{ shop.promote_price }}</p>
-            <p>{{ shop.name }}</p>
-            <p>天猫专卖</p>
-            <p><span>月交易</span><span>评论</span><span>评论</span><span>{{ shop.count }}</span></p>
-        </li>
-    {% endfor %}
+{% block page_content %}
+    <ul>
+        {% for shop in shops %}
+            <li>
+                <img src="{{ shop.images.0.shop_img_id }}" width="200">
+                <p>{{ shop.promote_price }}</p>
+                <p>{{ shop.name }}</p>
+                <p>天猫专卖</p>
+                <p><span>月交易</span><span>评论</span><span>评论</span>{{ shop.count }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
 
 
-
-    <li>
-        <img src="" width="200">
-        <p>¥1,979.10</p>
-        <p>Konka/康佳 T43U 43英寸64位4K超高清智能平板LED液晶电视机 42 </p>
-        <p>天猫专卖</p>
-        <p><span>月交易</span><span>评论</span><span>评论</span></p>
-    </li>
-</ul>
 
