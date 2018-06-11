@@ -119,16 +119,15 @@ def index(request):
     #         shop.images = shop.shopimage_set.all()
     #     cate.shops = shops
 
-    userinfo = {
-        'uid': request.session.get('uid'),
-        'name': request.session.get('name'),
-        'count': request.session.get('count'),
-    }
+    # userinfo = {
+    #     'uid': request.session.get('uid'),
+    #     'name': request.session.get('name'),
+    #     'count': request.session.get('count'),
+    # }
 
     return render(request, 'index.html', {'navigations': navigations,
                                           'cate_list': cate_list,
                                           'banners': banners,
-                                          'userinfo': userinfo
                                           })
 
 

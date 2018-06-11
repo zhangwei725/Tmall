@@ -6,9 +6,9 @@
             天猫首页
         </a>
         <span>喵，欢迎来天猫</span>
-        {% if userinfo.uid %}
-            <a href="">{{ userinfo.name }}</a>
-            <a href="">退出</a>
+        {% if request.session.userinfo.uid %}
+            <a href="">{{ request.session.userinfo.name }}</a>
+            <a href="{% url 'loginout' %}">退出</a>
         {% else %}
             <a href="{% url 'login' %}">请登录</a>
             <a href="{% url 'register' %}">免费注册</a>
@@ -17,7 +17,7 @@
 			<a href="">我的订单</a>
 			<a href="{% url 'show' %}">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart red_color"></span>
-			购物车<strong>{{ userinfo.count }}</strong>件</a>
+			购物车<strong>{{ request.session.userinfo.count }}</strong>件</a>
 		</span>
     </div>
 </nav>

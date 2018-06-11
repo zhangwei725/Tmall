@@ -23,7 +23,9 @@ def add_car(request):
 
 # 用户id
 def shop_car(request):
-    cars = ShopCar.objects.filter(user_id=request.session.get('uid'))
-    for car in cars:
-        car.shop.image = car.shop.shopimage_set.filter(type='type_single').first()
+    user_id = request.session.get('userinfo').get('uid')
+    if user_id:
+        cars = ShopCar.objects.filter(user_id=user_id)
+        for car in cars:
+            car.shop.image = car.shop.shopimage_set.filter(type='type_single').first()
     return render(request, 'cart.html', {'cars': cars})
