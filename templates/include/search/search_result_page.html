@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block page_title %}
+
+{% endblock %}
+{% block page_head %}
+    <!--顶部 -->
+    {% include 'include/comm/top.html' %}
+    <!--搜索按钮 -->
+    {% include 'include/comm/search.html' %}
+{% endblock %}
+{% block page_content %}
+    <!-- 搜索部分 -->
+    <div class="search_result_wrap">
+        {% include 'include/search/shop_by_search.html' %}
+    </div>
+{% endblock %}
+{% block page_footer %}
+    <!--公共部分底部 -->
+    {% include 'include/comm/footer.html' %}
+{% endblock %}
+

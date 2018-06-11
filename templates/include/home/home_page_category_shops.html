@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<div class="category_shops">
+    {% for cate in cate_list %}
+        <div class="category_shop ">
+            <div class="left-mark"></div>
+            <span>{{ cate.name }}</span>
+        </div>
+        <div class="clear">
+            {% for shop in cate.shops %}
+                {% if forloop.counter < 6 %}
+                    <div class="shop_item">
+                        <a href="{% url 'detail' shop.shop_id %}">
+                            <img src="{{ static_url }}img/middle/{{ shop.image.shop_img_id }}.jpg"></a>
+                        <a class="shop_item_desc_link" href="">
+                            <span class="shop_item_desc">[热销] {{ shop.sub_title }}</span>
+                        </a>
+                        <span class="shop_price">{{ shop.promote_price }}</span>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

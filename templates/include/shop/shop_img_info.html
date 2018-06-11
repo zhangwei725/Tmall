@@ -1,0 +1,82 @@
+{% load staticfiles %}
+
+<div class="shop_img_Info_warp clear">
+
+    <div class="shop_img_Info">
+        <img src="{{ static_url }}img/single/{{ shop.imgs.0.shop_img_id }}.jpg " class="bigImg">
+        <div class="shop_small_image_div">
+            {% for img in shop.imgs %}
+                {% if img.type == 'type_single' %}
+                    <img src="{{ static_url }}img/small/{{ img.shop_img_id }}.jpg"
+                         bigImageURL=""
+                         class="small_image">
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="img4load hidden"></div>
+    </div>
+
+    <div class="shop_info_div">
+        <div class="shop_title">
+            {{ shop.name }}
+        </div>
+        <div class="shop_sub_title">
+            {{ shop.sub_title }}
+        </div>
+        <div class="shop_price_wrap">
+            <div class="juhuasuan">
+                <span class="juhuasuan_big">聚划算</span>
+                <span>此商品即将参加聚划算，<span class="juhuasuan_time">1天19小时</span>后开始，</span>
+            </div>
+            <div class="shop_price_div">
+                <div class="gouwujuan_div">
+                    <img height="16px" src="{% static 'img/site/gouwujuan.png' %}"/>
+                    <span> 全天猫实物商品通用</span>
+                </div>
+                <div class="shop_original_div">
+                    <span class="original_price_desc">价格</span>
+                    <span class="original_price_yuan">¥</span>
+                    <span class="original_price">
+					    {{ shop.original_price }}
+					</span>
+                </div>
+                <div class="shop_promotion_div">
+                    <span class="promotion_price_desc">促销价 </span>
+                    <span class="promotion_price_yuan">¥</span>
+                    <span class="promotion_price">
+						  {{ shop.promote_price }}
+					</span>
+                </div>
+            </div>
+        </div>
+        <div class="shop_review_number">
+            <div>销量 <span class="red_color bold_word">312</span></div>
+            <div>累计评价 <span class="red_color bold_word">{{ reviews|length }}</span></div>
+        </div>
+        <div class="shop_number">
+            <span>数量</span>
+            <input class="shop_num_set" type="number" value="1" max=" {{ shop.stock }} " min="1"/> 件
+            <span>库存{{ shop.stock }}件</span>
+        </div>
+        <div class="service_commitment">
+            <span class="service_commitment_desc">服务承诺</span>
+            <span class="service_commitment_link">
+				<a href="#">正品保证</a>
+				<a href="#">极速退款</a>
+				<a href="#">赠运费险</a>
+				<a href="#">七天无理由退换</a>
+			</span>
+        </div>
+
+        <div class="shop_buy_wrap">
+            <a class="shop_buy_link" href="#">
+                <button class="buy_button">立即购买</button>
+            </a>
+            <a href="#" class="add_cart_link">
+                <button class="add_cart_button"><span class="glyphicon glyphicon-shopping-cart"></span>加入购物车</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,11 @@
+<!-- bootstrap 轮播图 -->
+{% load  staticfiles %}
+<div id="banner" class="banner">
+    <ul>
+        {% for banner in banners %}
+            <li><a href="#">
+                <img src="{{ media_url }}{{ banner.image }}"></a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

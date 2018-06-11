@@ -1,0 +1,22 @@
+<!-- 商品详情界面-->
+{% extends 'base.html' %}
+{% load  staticfiles %}
+{% block page_head %}
+    {% include 'include/comm/top.html' %}
+    <!--搜索按钮 -->
+    {% include 'include/comm/search.html' %}
+{% endblock %}
+
+{% block page_jq %}
+    <script src="{% static 'js/shop.js' %}"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="shop_page_div">
+        <img class="shop_page" src="{{ static_url }}img/category/{{ shop.cate.cate_id }}.jpg">
+    </div>
+    <div class="shop_page_div">
+        {% include 'include/shop/shop_img_info.html' %}
+        {% include 'include/shop/shop_detail.html' %}
+    </div>
+{% endblock %}

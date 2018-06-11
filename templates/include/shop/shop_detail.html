@@ -1,0 +1,12 @@
+<div class="shop_detail_div">
+    <div class="shop_detail_top_part">
+        <span class="selected">商品详情</span>
+        <span href="#" class="detail_review_link">累计评价
+            <span class="detail_review_count">{{ reviews|length }}</span>
+        </span>
+    </div>
+    {% include 'include/shop/shop_param.html' %}
+    {% include 'include/shop/shop_review.html' %}
+</div>
+
+

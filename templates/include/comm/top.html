@@ -1,0 +1,26 @@
+{% load  staticfiles %}
+<nav class="top ">
+    <div class="top_middle">
+        <a href="">
+            <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-home red_color"></span>
+            天猫首页
+        </a>
+        <span>喵，欢迎来天猫</span>
+        {% if userinfo.uid %}
+            <a href="">{{ userinfo.name }}</a>
+            <a href="">退出</a>
+        {% else %}
+            <a href="{% url 'login' %}">请登录</a>
+            <a href="{% url 'register' %}">免费注册</a>
+        {% endif %}
+        <span class="pull-right">
+			<a href="">我的订单</a>
+			<a href="{% url 'show' %}">
+			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart red_color"></span>
+			购物车<strong>{{ userinfo.count }}</strong>件</a>
+		</span>
+    </div>
+</nav>
+
+
+

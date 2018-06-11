@@ -1,0 +1,15 @@
+   <div class="shop_param_part_warp">
+        <div class="shop_param">产品参数：</div>
+        <div class="shop_param_list clear">
+            {% for property in properties %}
+                <span>{{ property.name }}: {{ property.value.value }}</span>
+            {% endfor %}
+        </div>
+        <div class="shop_detail_images_part">
+            {% for img in shop.imgs %}
+                {% if img.type == 'type_detail' %}
+                    <img src="{{ static_url }}img/detail/{{ img.shop_img_id }}.jpg">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>

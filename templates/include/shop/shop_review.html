@@ -1,0 +1,21 @@
+<div class="shop_review_wrap">
+    <div class="shop_review_content_part">
+        {% for review in  reviews %}
+            <div class="shop_review_item clear">
+                <div class="shop_review_item_desc">
+                    <div class="shop_review_item_content">
+                        {{ review.content }}
+                    </div>
+                    <div class="shop_review_item_date">
+                        {{ review.create_date|date:'Y-m-d' }}
+                    </div>
+                </div>
+                <div class="review_item_user">
+                    <span class="userInfoGrayPart">（匿名）</span>
+                </div>
+            </div>
+        {% empty %}
+            暂无评论
+        {% endfor %}
+    </div>
+</div>

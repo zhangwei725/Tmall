@@ -16,6 +16,7 @@ ALLOWED_HOSTS = []
 CUSTOM_APPS = [
     'apps.shop',
     'apps.car',
+    'apps.account',
 ]
 
 # 扩展的第三方库
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.shop.global_var.get_url',
             ],
         },
     },
@@ -102,7 +104,6 @@ USE_L10N = True
 USE_TZ = True
 # 通过浏览器地址栏访问静态资源的根路径
 STATIC_URL = '/static/'
-
 #
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -116,3 +117,6 @@ MEDIA_URL = '/media/'
 # 指定上传目录的根路径
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # 如果在测试环境下,能够访问到我的上传的资源,需要在根目录下urls.py中配置
+# 'http://127.0.0.1:8000/static/
+TEMP_STATIC_URL = 'http://127.0.0.1:8000' + STATIC_URL
+TEMP_MEDIA_URL = 'http://127.0.0.1:8000' + MEDIA_URL

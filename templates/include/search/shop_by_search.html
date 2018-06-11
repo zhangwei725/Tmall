@@ -1,0 +1,23 @@
+{% load  staticfiles %}
+<div class="search_shop clear">
+
+    {% for shop in shops %}
+        <div class="shop_unit">
+            <a href="">
+                <img class="shop_image_style" src="{{ static_url }}img/single/{{ shop.img.shop_img_id }}.jpg">
+            </a>
+            <span class="shop_price">{{ shop.promote_price }}</span>
+            <a class="shop_link" href="#">
+                {{ shop.name }}
+            </a>
+            <a class="tmall_link" href="">天猫专卖</a>
+            <div class="show1 shop_info">
+                <span class="month_deal ">月成交 <span class="shop_deal_num">10</span></span>
+                <span class="shop_review">评价<span class="product_review_number">30</span></span>
+                <span class="wangwang"><img src="{% static 'img/site/wangwang.png' %}"></span>
+            </div>
+        </div>
+    {% empty %}
+        <div class="no_match">没有满足条件的产品</div>
+    {% endfor %}
+</div>

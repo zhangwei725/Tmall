@@ -1,0 +1,80 @@
+{% load staticfiles %}
+<div class="cart_wrap">
+    <div class="cart_title pull-right">
+        <span>已选商品  (不含运费)</span>
+        <span class="cart_title_price">￥0.00</span>
+        <button class="create_order_btn" disabled="disabled">结 算</button>
+    </div>
+
+    <div class="cart_shop_list">
+        <table class="cart_shop_table">
+
+
+            <tr>
+                <th class="car_select_image">
+                    <img selectit="false" class="select_all_Item" src="{% static 'img/site/cartNotSelected.png' %}">
+                    全选
+                </th>
+                <th>商品信息</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th width="120px">金额</th>
+                <th class="operation">操作</th>
+            </tr>
+            {% for car in  cars %}
+                <tr class="cart_shop_item_tr">
+                    <td>
+                        <img class="cart_shop_item_if_selected"
+                             src="{% static 'img/site/cartNotSelected.png' %}">
+                        <a style="display:none" href=""><img src="{% static 'img/site/cartSelected.png' %}"></a>
+                        <img class="cart_shop_img"
+                             src="{{ static_url }}img/middle/{{ car.shop.image.shop_img_id }}.jpg">
+                    </td>
+                    <td>
+                        <div class="cart_product_link_out_div">
+                            <a href="{% url 'detail' car.shop.shop_id %}"
+                               class="cartProductLink">{{ car.shop.name }}</a>
+                            <div class="cart_shop_link_inner_div">
+                                <img src="{% static 'img/site/creditcard.png' %}" title="支持信用卡支付">
+                                <img src="{% static 'img/site/7day.png' %}" title="消费者保障服务,承诺7天退货">
+                                <img src="{% static 'img/site/promise.png' %}" title="消费者保障服务,承诺如实描述">
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="cart_shop_item_original_price">￥{{ car.shop.original_price }}</span>
+                        <span class="cart_shop_item_promotion_price">￥{{ car.shop.promote_price }}</span>
+                    </td>
+                    <td>
+                        <div class="cart_shop_change_num_div">
+                            <span class="hidden order_item_stock">{{ car.shop.stock }}</span>
+                            <span class="hidden orderItemPromotePrice"> </span>
+                            <a class="number_minus" href="#">-</a>
+                            <input class="order_item_number_setting"
+                                   autocomplete="off" value="{{ car.number }}">
+                            <a stock="{{ car.shop.stock }}" pid="${oi.product.id}" class="number_plus"
+                               href="#">+</a>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <a class="delete_order_item" href="">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="cart_foot">
+        <img selectit="false" class="select_all_Item" src="{% static 'img/site/cartNotSelected.png' %}">
+        <span>全选</span>
+        <div class="pull-right">
+            <span>已选商品 <span class="cart_sum_num">0</span> 件</span>
+            <span>合计 (不含运费): </span>
+            <span class="cart_sum_price">￥0.00</span>
+            <button class="create_order_button" disabled="disabled">结 算</button>
+        </div>
+    </div>
+</div>
+

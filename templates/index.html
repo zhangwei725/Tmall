@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_jq %}
+    <script src="{% static 'js/unslider.min.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+{% endblock %}
+{% block page_head %}
+    <!--顶部 -->
+    {% include 'include/comm/top.html' %}
+    <!--搜索按钮 -->
+    {% include 'include/comm/search.html' %}
+{% endblock %}
+{% block page_content %}
+    <!--首页内容 -->
+    {% include 'include/home/home_page.html' %}
+{% endblock %}
+
+{% block page_footer %}
+    <!--公共部分底部 -->
+    {% include 'include/comm/footer.html' %}
+{% endblock %}
+
+
+
+
