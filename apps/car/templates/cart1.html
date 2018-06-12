@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load  staticfiles %}
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'css/carts.css' %}">
+{% endblock %}
+<!-- parent()获取父类元素    prevAll() 获取所有兄弟元素 -->
+{% block page_jq %}
+    <script src="{% static 'js/carts.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#buy_btn').click(function () {
+                let $sum_input = $('.order_content input:checked')
+                    .parent()
+                    .nextAll('.list_amount')
+                    .find('.sum');
+
+                let value = $sum_input.val();
+                /**
+                 * 读写一体
+                 */
+                let id = $sum_input.attr('id')
+                console.log(value);
+                console.log(id)
+            })
+
+        })
+
+
+    </script>
+
+
+{% endblock %}
+
+{% block page_head %}
+    {% include 'include/comm/top.html' %}
+{% endblock %}
+{% block page_content %}
+    {% include 'cart_page.html' %}
+{% endblock %}
