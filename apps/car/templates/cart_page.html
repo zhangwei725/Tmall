@@ -19,10 +19,8 @@
         </div>
         <div class="cartBox">
             <div class="order_content">
-
                 {% for car in cars %}
                     <ul class="order_lists">
-
                         <li class="list_chk">
                             <input type="checkbox" id="checkbox_{{ forloop.counter0 }}" class="son_check" value="1">
                             <label for="checkbox_{{ forloop.counter0 }}"></label>
@@ -53,7 +51,7 @@
                         </li>
                         <!-- 单件商品总价-->
                         <li class="list_sum">
-                            <p class="sum_price">{{ car.number|get_ride_num:car.shop.promote_price }} </p>
+                            <p class="sum_price">￥{{ car.number|get_ride_num:car.shop.promote_price }} </p>
                         </li>
                         <li class="list_op">
                             <p class="del"><a href="javascript:;" class="delBtn">移除商品</a></p>

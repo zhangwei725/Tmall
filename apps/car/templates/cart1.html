@@ -4,28 +4,58 @@
     <link rel="stylesheet" href="{% static 'css/carts.css' %}">
 {% endblock %}
 <!-- parent()获取父类元素    prevAll() 获取所有兄弟元素 -->
+<!-- 核心思想  读写一体    get first set  all-->
+<!--
+1> 点击结算----> 上传输入的数量---->需要通过car_id去修改
+---> 定位元素---选中的元素--->查找到他的 数量的input--->
+
+-->
 {% block page_jq %}
     <script src="{% static 'js/carts.js' %}"></script>
     <script type="text/javascript">
+        // 选中的数量的数组
+        nums = [];
+        // 选中对应的carid的数组
+        // 服务器给客服端传递json数据
+        //  首先
+        ids = [];
+        cars = [];
         $(function () {
             $('#buy_btn').click(function () {
-                let $sum_input = $('.order_content input:checked')
-                    .parent()
-                    .nextAll('.list_amount')
-                    .find('.sum');
+                    let $sum_input = $('.order_content input:checked')
+                        .parent()
+                        .nextAll('.list_amount')
+                        .find('.sum');
+                    /**
+                     * 遍历选中元素的数量的input元素
+                     */
+                    $sum_input.each(function () {
+                        //nums.push($(this).val());
+                        //ids.push($(this).attr('id'));
+                        car = {
+                            num: $(this).val(),
+                            car_id: $(this).attr('id'),
+                        };
+                        cars.push(car)
+                    });
 
-                let value = $sum_input.val();
-                /**
-                 * 读写一体
-                 */
-                let id = $sum_input.attr('id')
-                console.log(value);
-                console.log(id)
-            })
-
+                    data = {
+                        cars: JSON.stringify(cars),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    };
+                    /**
+                     *   $.post('{% url 'buy' %}', data)
+                     *   当使用ajax传递数组 添加属性traditional:true
+                     */
+                    $.ajax({
+                        url: '{% url 'buy' %}',
+                        type: 'post',
+                        data: data,
+                        traditional: true,
+                    })
+                }
+            )
         })
-
-
     </script>
 
 

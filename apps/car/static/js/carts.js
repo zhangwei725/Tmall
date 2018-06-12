@@ -3,8 +3,6 @@ $(function () {
     //全局的checkbox选中和未选中的样式
     var $allCheckbox = $('input[type="checkbox"]'),     //全局的全部checkbox
         $wholeChexbox = $('.whole_check'),
-        $cartBox = $('.cartBox'),                       //每个商铺盒子
-        $shopCheckbox = $('.shopChoice'),               //每个商铺的checkbox
         $sonCheckBox = $('.son_check');                 //每个商铺下的商品的checkbox
     $allCheckbox.click(function () {
         if ($(this).is(':checked')) {

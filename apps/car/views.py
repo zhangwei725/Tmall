@@ -1,5 +1,7 @@
+import json
+
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from apps.shop.models import ShopCar, Shop
 
@@ -41,13 +43,30 @@ def add_car(request):
 def shop_car(request):
     user_id = request.session.get('userinfo').get('uid')
     if user_id:
-        cars = ShopCar.objects.filter(user_id=user_id)
+        cars = ShopCar.objects.filter(user_id=user_id, status=1)
         for car in cars:
             car.shop.image = car.shop.shopimage_set.filter(type='type_single').first()
     return render(request, 'cart1.html', {'cars': cars})
 
 
+# 数组  列表
+# 对象  字典
 def buy_shop(request):
     if request.method == 'POST':
-        checks = request.POST.getlist('nums')
-    return HttpResponse('1111')
+        # 获取用户提交的数据
+        cars = request.POST.get('cars')
+        cars = json.loads(cars)
+        for car in cars:
+            num = car['num']
+            car_id = car['car_id']
+            ShopCar.objects.filter(car_id=car_id).update(number=num, status=2)
+    return redirect('http://127.0.0.1:8000/car/confirm')
+
+
+def confirm_buy_shop(request):
+    user_id = request.session.get('userinfo').get('uid')
+    if user_id:
+        cars = ShopCar.objects.filter(user_id=user_id, status=2)
+        for car in cars:
+            car.shop.image = car.shop.shopimage_set.filter(type='type_single').first()
+    return render(request, 'buy_page.html', {'cars': cars})
